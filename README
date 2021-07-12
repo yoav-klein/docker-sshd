@@ -1,0 +1,30 @@
+
+*************************
+SSH Docker Image
+*************************
+
+This demo is aimed to demonstrate the use of running a Docker container
+that can accept ssh connections. 
+
+
+
+Dockerfile
+--------
+In the dockerfile, we need to install ssh-server, and run 
+service ssh start
+so that the /run/sshd directory will be created. 
+
+We also create a new user, since we don't want to run the container as root.
+BUT - in order to start sshd, we do need root priviliges, so it needs to be 
+sudoer.
+
+We define the CMD as ["sudo", "/usr/sbin/sshd", "-D"]
+
+Running the container 
+--------------------
+We can just run the container with -it, which will then prompt us for
+password for develop user. 
+
+Another option:
+Run the container with the `cat` command so it won't exit
+Then, run docker exec sudo /usr/sbin/sshd
